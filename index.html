@@ -301,6 +301,63 @@
             display: flex;
         }
 
+        /* 热门主题模块 */
+        .hot-topics-section {
+            margin-bottom: 16px;
+        }
+        
+        .hot-topics-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--on-primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .hot-topics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .hot-topic-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius-md);
+            padding: 10px 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--on-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            line-height: 1.4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+        }
+        
+        .hot-topic-item:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .hot-topics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hot-topic-item {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+        }
+        
         /* Filters */
         .filters {
             display: flex;
@@ -1119,60 +1176,19 @@
                     </div>
                 </div>
                 
-                <!-- 近期热点与推荐主题表格 -->
-                <div class="hotspots-section">
-                    <div class="hotspots-header">
-                        <!-- 标题已删除 -->
+                <!-- 热门主题模块 -->
+                <div class="hot-topics-section">
+                    <div class="hot-topics-label">
+                        <span class="emoji">🔥</span>
+                        热门主题
                     </div>
-                    
-                    <div class="hotspots-grid">
-                        <!-- 消费热点卡片 -->
-                        <div class="hotspot-card consumer">
-                            <div class="card-header">
-                                <div class="card-title-line" style="display: flex; align-items: center; gap: 6px; margin-bottom: 3px;">
-                                    <div class="card-icon consumer">🏪</div>
-                                    <span style="font-weight: 600; font-size: 16px; color: #333;">消费</span>
-                                </div>
-                                <div class="card-subtitle" style="margin-top: 0; color: #666; font-size: 12px; line-height: 1.3;">
-                                    消费市场最新动态与投资机会
-                                </div>
-                            </div>
-                            
-                            <ul class="hotspot-list" id="consumerHotspots">
-                                <!-- 消费热点将通过JavaScript动态加载 -->
-                                <li class="hotspot-item">
-                                    <div class="hotspot-marker consumer"></div>
-                                    <div class="hotspot-content">
-                                        <div class="hotspot-topic">正在加载消费热点数据...</div>
-                                        <div class="hotspot-themes"><strong>相关路演主题：</strong></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <!-- 海外热点卡片 -->
-                        <div class="hotspot-card overseas">
-                            <div class="card-header">
-                                <div class="card-title-line" style="display: flex; align-items: center; gap: 6px; margin-bottom: 3px;">
-                                    <div class="card-icon overseas">🌍</div>
-                                    <span style="font-weight: 600; font-size: 16px; color: #333;">海外</span>
-                                </div>
-                                <div class="card-subtitle" style="margin-top: 0; color: #666; font-size: 12px; line-height: 1.3;">
-                                    全球市场动态与投资策略
-                                </div>
-                            </div>
-                            
-                            <ul class="hotspot-list" id="overseasHotspots">
-                                <!-- 海外热点将通过JavaScript动态加载 -->
-                                <li class="hotspot-item">
-                                    <div class="hotspot-marker overseas"></div>
-                                    <div class="hotspot-content">
-                                        <div class="hotspot-topic">正在加载海外热点数据...</div>
-                                        <div class="hotspot-themes"><strong>相关路演主题：</strong></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="hot-topics-grid">
+                        <div class="hot-topic-item" onclick="searchTopic('全球权益策略：地缘新阶段的配置方向')">全球权益策略：地缘新阶段的配置方向</div>
+                        <div class="hot-topic-item" onclick="searchTopic('韩国：存储超级周期中的领跑者')">韩国：存储超级周期中的领跑者</div>
+                        <div class="hot-topic-item" onclick="searchTopic('大消费：内需防御，寻觅拐点')">大消费：内需防御，寻觅拐点</div>
+                        <div class="hot-topic-item" onclick="searchTopic('黄金：地缘扰动下如何看金价的短中期方向？')">黄金：地缘扰动下如何看金价的短中期方向？</div>
+                        <div class="hot-topic-item" onclick="searchTopic('创新药：政策预期回暖，出海贡献弹性')">创新药：政策预期回暖，出海贡献弹性</div>
+                        <div class="hot-topic-item" onclick="searchTopic('AI应用：如何利用龙虾类AI工具赋能投研')">AI应用：如何利用"龙虾类"AI工具赋能投研</div>
                     </div>
                 </div>
                 
@@ -1464,6 +1480,18 @@
             searchInput.value = '';
             activeFilters.search = '';
             searchClear.classList.remove('show');
+            
+            applyFilters();
+        }
+        
+        // 点击热门主题进行搜索
+        function searchTopic(topic) {
+            const searchInput = document.getElementById('searchInput');
+            const searchClear = document.getElementById('searchClear');
+            
+            searchInput.value = topic;
+            activeFilters.search = topic;
+            searchClear.classList.add('show');
             
             applyFilters();
         }
